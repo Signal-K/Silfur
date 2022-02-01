@@ -15,6 +15,11 @@ ___
 
 ___
 
+Note: `game` branch
+* Polygon-based smart contract for NFT cards
+* Building an [api component](https://github.com/signal-k/dabpi) on top of smart contract
+* Build moralis api into this branch
+
 
 ## 📝 What is "Signal-K/polygon"?
 
