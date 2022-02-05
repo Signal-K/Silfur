@@ -12,6 +12,9 @@ contract GearToken is ERC721, Ownable {
 
     uint256 COUNTER; // Incremental function for indexing of NFTs
 
+    // Gas fee function
+    uint256 fee = 1 ether;
+
     struct Gear {
         string name;
         uint256 id;
@@ -30,21 +33,32 @@ contract GearToken is ERC721, Ownable {
         return randomNum % _mod;
     } 
 
+    function updateFee(uint256 _fee) external onlyOwner() {
+        fee = _fee;
+    }
+
+    function withdraw() external payable onlyOwner() {
+        address _owner = owner();
+        _owner.transfer(address(this).balance);
+    }
+
     // Minting/creation stage of the token
-    function _createGear(string memory _name, uint256 _dna) internal {
-        Gear memory newGear = Gear(_name, COUNTER, _dna, 1, 50);
+    function _createGear(string memory _name) internal {
+        uint8 randRarity = uint8(_createRandomNum(100)); // Modulus of 100 -> Random number from 1-100; converting/casting from uint256 to uint8
+        uint256 randDna = _createRandomNum(10**16);
+        Gear memory newGear = Gear(_name, COUNTER, randDna, 1, randRarity);
         gears.push(newGear); // Adds the new gear onto the array
         _safeMint(msg.sender, COUNTER); // Send the token to the account that initialised the transaction?, what is the identifier of the NFT that's being minted?
-        emit NewGear(msg.sender, COUNTER, _dna);
+        emit NewGear(msg.sender, COUNTER, randDna);
         COUNTER++;
     }
 
-    function createRandomGear(string memory _name) public {
-        uint256 randDna = _createRandomNum(10**16);
-        _createGear(_name, randDna);
+    function createRandomGear(string memory _name) public payable {
+        require(msg.value == fee, "The fee is not correct"); // msg.value => how much the address input and sent to the contract
+        _createGear(_name);
     }
 
-    // Getter functiongs
+    // Getter functions
     function getGears() public view returns(Gear[] memory){
         return gears;
     }
