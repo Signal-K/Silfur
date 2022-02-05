@@ -25,9 +25,9 @@ contract GearToken is ERC721, Ownable {
     event NewGear(address indexed owner, uint256 id, uint256 dna);
 
     // Helpers
-    function _genRandomDna(string memory _str) internal pure returns(uint256) { // generate DNA
-        uint256 randomNum = uint256(keccak256(abi.encodePacked(_str))); // Takes the string input into function _genRandomDna and hashes it into a random number (keccak256)
-        return randomNum % 10**16; // Make sure number is 16 digits
+    function _createRandomNum(uint256 _mod) internal view returns(uint256) { // generate DNA
+        uint256 randomNum = uint256(keccak256(abi.encodePacked(block.timestamp, msg.sender))); // Takes the string input into function _genRandomDna and hashes it into a random number (keccak256)
+        return randomNum % _mod;
     } 
 
     // Minting/creation stage of the token
@@ -40,7 +40,7 @@ contract GearToken is ERC721, Ownable {
     }
 
     function createRandomGear(string memory _name) public {
-        uint256 randDna = _genRandomDna(_name);
+        uint256 randDna = _createRandomNum(10**16);
         _createGear(_name, randDna);
     }
 
