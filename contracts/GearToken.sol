@@ -37,8 +37,8 @@ contract GearToken is ERC721, Ownable {
         fee = _fee;
     }
 
-    function withdraw() external payable onlyOwner() {
-        address _owner = owner();
+    function withdraw() external payable onlyOwner() { // Withdraw the (holding) gas fee that was paid, only users who have created NFTs can withdraw the gas they've put in
+        address payable _owner = payable(owner());
         _owner.transfer(address(this).balance);
     }
 
@@ -54,7 +54,7 @@ contract GearToken is ERC721, Ownable {
     }
 
     function createRandomGear(string memory _name) public payable {
-        require(msg.value == fee, "The fee is not correct"); // msg.value => how much the address input and sent to the contract
+        require(msg.value >= fee, "The fee is not correct"); // msg.value => how much the address input and sent to the contract
         _createGear(_name);
     }
 
