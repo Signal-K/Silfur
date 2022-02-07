@@ -25,13 +25,22 @@ Note: `game` branch
 
 Simple experiments relating to the creation of a custom, production-ready polygon token for use in our game engine network "Star Sailors"
 
-## ⁉️ Why?
-
-We're wanting to have full control over every component of our blockchain platform, while still using frameworks & technologies developed by other parties.
-
 ## 🌱 Software Requirements
 
 NodeJS v16.1
+Ganache CLI
+
+### 🦠 Node Requirements
+These requirements are for the node/react components of this sample NFT project
+
+Use either `yarn install` or `npm install` to install all the required node packages.
+
+* `Redux` -> State management system
+* `Redux-thunk` -> Provides the ability to write action creators that return a function
+* `React-redux` -> Get `redux` to work with `react`
+* `web3` -> Provides access to blockchain-specific functions & utilities (example authentication)
+* `styled-components` -> Easy css library
+* `@openzeppelin/contracts` -> Provides reference to ERC tokens for integration with the smart contract (see `contracts` folder/directory)
 
 ## 🚀 Technologies Used
 
