@@ -15,15 +15,31 @@ function App() {
     dispatch(connect());
   }, [dispatch]);
 
-  return <s.Screen>
-    <s.Container flex={1} ai={"center"} jc={"center"}>
-      <s.TextTitle>
-        Our game
-      </s.TextTitle>
-      <s.SpacerSmall />
-      <button>CONNECT</button>
-    </s.Container>
-  </s.Screen>
+  return (
+    <div 
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        backgroundColor: "pink",
+        height: "100vh"
+      }}
+    >
+      <p>Our Game</p>
+      <div>
+        <button>Connect</button>
+      </div>
+    </div>
+  );
 }
 
 export default App;
+
+// Green & pink divs in return
+return <s.Screen style={{backgroundColor: "pink" }}>
+    <s.Container flex={1} ai={"center"} jc={"center"} style={{backgroundColor: "green" }}>
+      <s.TextTitle>
+        Our game
+      </s.TextTitle>
+      <button>CONNECT</button>
+    </s.Container>
+  </s.Screen>
