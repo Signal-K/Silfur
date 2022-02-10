@@ -62,4 +62,17 @@ contract GearToken is ERC721, Ownable {
     function getGears() public view returns(Gear[] memory){
         return gears;
     }
+
+    function getOwnerGears(address _owner) public view returns (Gear[] memory) { // Get all of the owner's Gears
+        // Filter & loop through all gears, retrieve only the owner's gears (getter)
+        Gear[] memory result = new Gear[](balanceOf(_owner)); // balanceOf(_owner) => how many NFTs the owner has (from ERC721 smartcontract script from openzeppelin)
+        uint256 counter = 0;
+        for(uint256 i = 0; i < gears.length; i++) {
+            if(ownerOf(i) == _owner) { // If the owner of the NFT is the same as the address that's calling the function
+                result[counter] = gears[i];
+                counter++;
+            }
+        }
+        return result;
+    }
 }

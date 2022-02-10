@@ -12,17 +12,24 @@ function App() {
   console.table(blockchain);
 
   useEffect(() => {
-    dispatch(connect());
   }, [dispatch]);
 
   return <s.Screen>
+    {blockchain.account !== "" || blockchain.gearToken !== null ? (
     <s.Container flex={1} ai={"center"} jc={"center"}>
-      <s.TextTitle>
-        Our game
-      </s.TextTitle>
       <s.SpacerSmall />
-      <button>CONNECT</button>
+      <button onClick={(e) => {
+        e.preventDefault(); // prevent default form submit
+        dispatch(connect());
+      }}>CONNECT</button>
     </s.Container>
+    ) : (
+      <s.Container>
+        <s.TextTitle>
+          Connect to our Game
+        </s.TextTitle>
+      </s.Container>
+    )}
   </s.Screen>
 }
 

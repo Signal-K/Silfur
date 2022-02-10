@@ -1,6 +1,7 @@
 const initialState = {
     loading: false,
     allGears: [],
+    allOwnerGears: [],
     error: false,
     errorMsg: "",
 };
@@ -17,6 +18,7 @@ const dataReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 allGears: action.payload.allGears,
+                allOwnerGears: action.payload.allOwnerGears,
             };
         case "CHECK_DATA_FAILED":
             return {
