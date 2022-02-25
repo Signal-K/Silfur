@@ -1,5 +1,5 @@
-var GearToken = artifacts.require("GearToken");
+const GearToken = artifacts.require("GearToken");
 
 module.exports = function (deployer) {
-    deployer.deploy(GearToken);
+    deployer.deploy(GearToken, "GearTokens", "GEAR"); // Name, symbol
 };
