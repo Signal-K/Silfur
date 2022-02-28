@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import store from "./redux/store";
+import { Provider } from "react-redux";
+import "./styles/reset.css";
+import "./styles/theme.css";
 
-ReactDOM.render(
-  <React.StrictMode>
+ReactDOM.render( // App will have access to the store (and all the Redux states)
+  <Provider store={store}> 
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

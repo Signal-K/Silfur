@@ -35,6 +35,8 @@ These requirements are for the node/react components of this sample NFT project
 
 Use either `yarn install` or `npm install` to install all the required node packages.
 
+Ensure that the Wallet Network address is set correctly (should be port 8545 on  the localhost if running off `ganache-cli`)
+
 * `Redux` -> State management system
 * `Redux-thunk` -> Provides the ability to write action creators that return a function
 * `React-redux` -> Get `redux` to work with `react`
