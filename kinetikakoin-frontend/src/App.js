@@ -11,18 +11,20 @@ function App() {
 
   console.table(blockchain);
 
-  useEffect(() => {
-    dispatch(connect());
-  }, [dispatch]);
-
   return (
-    <div>
-      <p>
-        Our game
-      </p>
-      <button>Connect
-      </button>
-    </div>
+    <s.Screen /*style={{ backgroundColor: "pink" }}*/>
+      <s.Container flex={1} ai={"center"} jc={"center"} /*style={{ backgroundColor: "green", /*minHeight: "100vh" *//*}}*/>
+        <s.TextTitle>
+          Connect to the game!
+        </s.TextTitle>
+        <s.SpacerSmall />
+        <button onClick={(e) => {
+          e.preventDefault();
+          dispatch(connect());
+        }}
+        >CONNECT</button>
+      </s.Container>
+    </s.Screen >
   );
 }
 
