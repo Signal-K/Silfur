@@ -1,5 +1,8 @@
 <h2 align="center">Polygon Experiments</h2>
 
+`Ropsten` branch: creating some erc20 implementations based on Gridcoin & Moralis
+
+Scope: Users will be able to add their own citizen science data (connected to the [dao](https://github.com/signal-k/marketplace/issues/7)) in different buckets like "planet hunters" in Zooniverse. This will be publicly accessible via an API and will be hosted partially with Moralis & partially on our own Umbrel/CasaOS servers. This also integrates with the Panoptes APIs from Zooniverse & Gridcoin/Curecoin
 ___
 
 <p align="center">
