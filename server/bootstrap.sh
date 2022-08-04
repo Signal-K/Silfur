@@ -1,0 +1,3 @@
+export FLASK_APP=./panoptesk/Server.py
+source $(pipenv --venv)/bin/activate
+flask run -h 0.0.0.0

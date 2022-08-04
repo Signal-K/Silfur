@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 //import randomUser from '../apis/test.js';
 
 const restEndpoint = 'https://randomuser.me/api';
-  const callRestApi = async () => {
-    const response = await fetch(restEndpoint);
-    const jsonResponse = await response.json();
-    console.log(jsonResponse);
-    return React.createElement('h1', null, JSON.stringify(jsonResponse));
+const callRestApi = async () => {
+  const response = await fetch(restEndpoint);
+  const jsonResponse = await response.json();
+  console.log(jsonResponse);
+  return React.createElement('h1', null, JSON.stringify(jsonResponse));
 };
 
 function RenderResult() {
