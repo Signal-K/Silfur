@@ -38,4 +38,4 @@ print(planet_x_dur)
 # Create different pcg terrain models for planet types (e.g. scorched rocky) and example player interfaces/builds
 # Draft up planetary system requirements & document the pcg methods that will draw from those tensforflow models based on lightkurve (flattened) models
 # For now just 3d spheres based on the models from exynos and then merge into the current pcg models
-# ICRAR models / ska7
+# ICRAR models / ska (wa & south america) | keybase://chat/signalkinetics.hack#meta/5
