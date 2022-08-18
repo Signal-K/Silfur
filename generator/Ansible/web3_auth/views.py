@@ -14,12 +14,12 @@ from django.contrib.auth.models import User
 API_KEY = ''
 
 def moralis_auth(request):
-    return render(request, 'login.html', {})
+    return render(request, 'login.html', {}) # view for the authentication (in django class)
 
-def my_profile(request):
+def my_profile(request): # profile info view
     return render(request, 'profile.html', {})
 
-def request_message(request):
+def request_message(request): # Request a message from Moralis, signed with metamask
     data = json.loads(request.body)
     print(data)
 
@@ -27,7 +27,7 @@ def request_message(request):
     request_object = {
         'domain': "defi.finance",
         'chainId': 1,
-        'address': data['address'],
+        'address': data['address'], # this is send to `if x.status_code == 201`
         'statement': 'Please Confirm',
         'uri': 'https://defi.finance',
         'expirationTime': '2023-01-01T00:00:00.000Z',
@@ -42,5 +42,35 @@ def request_message(request):
 
     return JsonResponse(json.loads(x.text))
 
-def verify_message(request):
+def verify_message(request): # Validate the received signature, create a user in Django with this response
     data = json.loads(request.body)
+    print(data)
+
+    REQUEST_URL = 'https://authapi.moralis.io/challenge/verify/evm'
+    x = requests.post(
+        REQUEST_URL,
+        json=data,
+        headers={'X-API-KEY': API_KEY})
+
+    print(json.loads(x.text))
+    print(x.status_code)
+    if x.status_code == 201: # user is able to authenticate
+        eth_address=json.loads(x.text).get('address')
+        print('eth address', eth_address)
+        try: # add the user to the django auth after authenticating user address with Moralis api
+            user = User.objects.get(username=eth_address)
+        except User.DoesNotExist: # if there is no entry in Moralis with that wallet address already
+            user = User(username=eth_address)
+            user.is_staff = False
+            user.is_superuser = False # Django admin/user manager auth method
+            user.save()
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                request.session['auth_info'] = data
+                request.session['verified_data'] = json.loads(x.text)
+                return JsonResponse({'user': user.username})
+            else:
+                return JsonResponse({'error': 'Account disabled'})
+    else:
+        return JsonResponse(json.loads(x.text))
