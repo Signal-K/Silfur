@@ -1,28 +1,41 @@
-import mongoengine as db
-from pymongo import MongoClient
 
-database_name = "planetData"
-password = "7eyKlkQ48nYwA80w"
-DB_URI = "mongodb+srv://Mongo:Ii2V1vkMsq58o9YB@cluster0.lzuxpat.mongodb.net/?retryWrites=true&w=majority" # Move back to below function later, currently this is sending to an empty/test table
-"""DB_URI = "mongodb+srv://G1zmotronn:{}@cluster0.lzuxpat.mongodb.net/{}>retryWrites=true&w=majority".format(
-    password, database_name
-) # connection string to mongodb"""
-db.connect(host=DB_URI)
+# PanopteSK / Planets
+Documentation relating to the planets database & content on the server and API
 
-# Collection class
-class Planet(db.Document):
-    planet_id = db.IntField()
-    name = db.StringField()
-    moonNumber = db.IntField()
+# Data
+## Attributes
+* Distance from parent star
+* Planet name
+* Moons + moon attributes (copy of planet attributes, but with `planet` replacing `star` in 'parent star')
+* Temperature
+* Type (Rocky, water, gas, ice)
+* Diameter/Radius
+* Mass
+* Atmosphere/composition
 
-    # Show JSON Output
-    def to_json(self):
-        return {
-            "planet_id": self.planet_id,
-            "name": self.name,
-            "moonNumber": self.moonNumber,
-        }
+## Data sources
+Just like the other citizen science projects, this data is gathered from public data like the Kepler Space Telescope's records, as well as Zooniverse/Panoptes
 
+# API Requests
+These endpoints are using the port `5000` as an example
+
+## Get
+Get every planet: <!--Update these links to match/connect with the rest of the docs and platform -->
+```bash
+curl http://api.skinetics.tech:5000/planets
+```
+
+## Create
+Create a single planet:
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+    "planetName": "",
+    "planetMoons":  
+}' http://api.skinetics.tech:5000/planets
+```
+
+# MongoDB Processes
+```py
 # Create a new planet process
 print("\nCreate a Planet")
 planet = Planet(planet_id=1,
@@ -86,6 +99,4 @@ print("\nDelete all the planets in this collection")
 for planet in Planet.objects():
     planet.delete()
 print(Planet.objects.count())
-
-# mongo username: G1zmotronn
-# mongo pw: 7eyKlkQ48nYwA80w // Ii2V1vkMsq58o9YB
+```
