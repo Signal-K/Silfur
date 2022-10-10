@@ -1,7 +1,9 @@
 <h2 align="center">Polygon Experiments</h2>
 
-`Ropsten` branch: creating some erc20 implementations based on Gridcoin & Moralis
+`Ropsten` branch: creating some erc20 implementations based on Gridcoin & Moralis, and integrating it with a python & js-based backend & API
+`Ropsten-Cat` branch: experimenting with calling APIs from the custom flask application inside `server` dir
 Generator: [nft generator](https://github.com/Signal-K/theclub/blob/b1f24fb40645c21af52b96af17d4a4efff9ba74c/generator%2Favatar_generator.py)
+`flask-frontend` branch: simplifying from `ropsten-cat` to just a simple react-frontend and flask-backend framework which will later be extended into `Ropsten-Cat` branch again
 
 Scope: Users will be able to add their own citizen science data (connected to the [dao](https://github.com/signal-k/marketplace/issues/7)) in different buckets like "planet hunters" in Zooniverse. This will be publicly accessible via an API and will be hosted partially with Moralis & partially on our own Umbrel/CasaOS servers. This also integrates with the Panoptes APIs from Zooniverse & Gridcoin/Curecoin
 ___
