@@ -21,20 +21,23 @@ ___
 
 ___
 
-Note: `game` branch
-* Polygon-based smart contract for NFT cards
-* Building an [api component](https://github.com/signal-k/dabpi) on top of smart contract
-* Build moralis api into this branch
-
 
 ## 📝 What is "Signal-K/polygon"?
 
 Simple experiments relating to the creation of a custom, production-ready polygon token for use in our game engine network "Star Sailors"
 
+We're also testing our API endpoints here, to investigate the desired integrations with our token and the rest of our product ecosystem
+
 ## 🌱 Software Requirements
 
 NodeJS v16.1
 Ganache CLI
+Pipenv
+
+### ⛓ Python Requirements
+See `Pipfile` in the root directory for the full list of dependencies. Packages should be installed by creating a `pipenv shell` and then installing all modules.
+
+See `./docs/FlaskProcess` for information and updates about the python components.
 
 ### 🦠 Node Requirements
 These requirements are for the node/react components of this sample NFT project
