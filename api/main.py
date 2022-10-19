@@ -1,18 +1,34 @@
 from flask import Flask, request
+#from flask_restful import Api, Resource, reqparse, abort
+from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api, Resource, reqparse, abort
 
 app = Flask(__name__)
 api = Api(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db' # location of the database -> see `database.db` in root directory (inside `./api` in signal-k/polygon)
+db = SQLAlchemy(app) # Wrap the database around the flask app
 
-# Data (Planet names e.g.)
+# Database models
+class VideoModel(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(100), nullable = False)
+    views = db.Column(db.Integer, nullable = False)
+    likes = db.Columnn(db.Integer, nullable = False)
+
+    def __repr__(self):
+        return f"Video(name = {name}, views = {views}, likes = {likes})"
+
+db.create_all() # Create the database model
+
+""" # Data (Planet names e.g.) 
 names = {"Earth": {"Moons": 1, "Type": "Terrestrial"},
-"Mars": {"Moons": 2, "Type": "Terrestrial"}} # Update with TIC Ids
+"Mars": {"Moons": 2, "Type": "Terrestrial"}} # Update with TIC Ids """
 
 # User classification videos
 video_put_args = reqparse.RequestParser()
-video_put_args.add_argument("name", type=str, help="Name of the video")
-video_put_args.add_argument("views", type=int, help="Views of the video") # Change this later to be "matches" (i.e. if someone has classified or added the same dataset)
-video_put_args.add_argument("likes", type=int, help="Likes on the video") # Change this later to be a rating (two-tiered approach like on RottenTomatoes)
+video_put_args.add_argument("name", type=str, help="Name of the video", required = True)
+video_put_args.add_argument("views", type=int, help="Views of the video", required = True) # Change this later to be "matches" (i.e. if someone has classified or added the same dataset)
+video_put_args.add_argument("likes", type=int, help="Likes on the video", required = True) # Change this later to be a rating (two-tiered approach like on RottenTomatoes)
 
 videos = {}
 
@@ -37,22 +53,12 @@ class Video(Resource):
         videos[video_id]: args
         return videos[video_id], 201
 
-    def delete(self, video_id):
+    def delete(self, video_id): 
         abort_if_video_id_doesnt_exist(video_id)
         del videos[video_id]
-        return 'Successfully deleted video', 204
+        return '', 204
 
 api.add_resource(Video, "/video/<int:video_id>")
-
-"""# Demo request sitter
-class HelloWorld(Resource):
-    def get(self, name):
-        return names[name]
-
-    def post(self):
-        return {"data": "Posted"}
-
-api.add_resource(HelloWorld, "/helloworld/<string:name>") # User will add a string (e.g. their name) | e.g. response = requests.get(BASE + 'helloworld/liam')"""
 
 if __name__ == '__main__':
     app.run(debug = True)

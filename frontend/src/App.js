@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import FileUpload from './components/file-upload';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -28,6 +29,7 @@ function App() {
           Learn React
         </a>
         <p>The current time is { currentTime }.</p>
+        <FileUpload />
       </header>
     </div>
   );

@@ -11,3 +11,6 @@ As of right now, there are three flask apps:
 * `./api` -> Demo api that will be merged into `./frontend/server` later
 
 Flask app in `./` should be merged with api in `./api` once finished
+
+## Database information
+Right now, in `./api` we're using the `flask-sqlalchemy` module for data stores, however we're going to switch to a hybrid of Mongo, Moralis with a relational component once this POC is completed.
