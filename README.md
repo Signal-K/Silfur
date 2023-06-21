@@ -1,3 +1,5 @@
+<!-- Originally at signal-k/polygon: Lightweight API demos for our citizen science platform -->
+
 <h2 align="center">Polygon Experiments</h2>
 
 `Ropsten` branch: creating some erc20 implementations based on Gridcoin & Moralis, and integrating it with a python & js-based backend & API
